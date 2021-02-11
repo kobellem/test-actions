@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  service1:
+    image: ${DOCKER_REGISTRY-localhost:5000}/service1:${TAG-dev}
+    build:
+      context: .
+      dockerfile: src/Service1/Dockerfile
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/status/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+  service2:
+    image: ${DOCKER_REGISTRY-localhost:5000}/service2:${TAG-dev}
+    build:
+      context: .
+      dockerfile: src/Service2/Dockerfile
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/status/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s

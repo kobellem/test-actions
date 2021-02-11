@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  integrationtests:
+    depends_on:
+      - service1
+    image: ${DOCKER_REGISTRY-localhost:5000}/integrationtests:${TAG-dev}
+    volumes:
+      - ./:/repo
+    build:
+      context: .
+      dockerfile: src/Service1.IntegrationTests/Dockerfile
